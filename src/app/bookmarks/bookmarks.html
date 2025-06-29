@@ -1,0 +1,21 @@
+<div class="bookmarks-wrapper">
+
+  <div class="bookmarks">
+    @for (bookmark of bookmarks; track bookmark) {
+      <app-bookmark-tile [bookmark]="bookmark"/>
+    } @empty {
+      <p>No bookmark yet.</p>
+    }
+  </div>
+
+  <div class="btns-container btns-centered">
+    <a routerLink="/bookmarks/add" class="btn add-btn">
+      <mat-icon class="icon" fontIcon="add"></mat-icon>
+        Add
+    </a>
+    <a routerLink="/bookmarks/manage" class="btn manage-btn">
+        <mat-icon class="icon settings" fontIcon="settings"></mat-icon>
+        Manage
+    </a>
+  </div>
+</div>

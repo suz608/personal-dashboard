@@ -1,0 +1,11 @@
+<div class="bookmark-tile" (click)="openBookmark()">
+  <img [src]="icon" alt="" *ngIf="!faviconError"/>
+
+  <i *ngIf="faviconError" class="pi pi-circle">
+    <div class="text-overlay">
+      {{ bookmark.name.toUpperCase()[0] }}
+    </div>
+  </i>
+
+  <p class="tile-text">{{bookmark.name}}</p>
+</div>

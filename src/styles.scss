@@ -1,0 +1,102 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@use "./app/styles/theme-colors";
+@import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css"); /* Remove all default styling */
+
+$btn-text-color: white;
+
+h2{
+  font-size: 24px;
+  font-weight: bold;
+  &.is-bold{
+    font-size: 32px;
+  }
+}
+
+h3{
+  color:rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 12px 15px;
+    gap:10px;
+    background: rgba(145, 145, 145, 0.5);
+
+    text-decoration: none;
+
+    color: $btn-text-color;
+
+    font-size: 18px;
+    font-weight: 200;
+    font-family: inherit;
+
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(203, 201, 201, 0.5);
+      backdrop-filter: blur(2px);
+    }
+
+    &:active {
+      background-color: rgba(216, 216, 216, 0.5);
+    }
+
+}
+
+.btns-container {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 20px;
+
+    &.btns-centered {
+        justify-content: center;
+    }
+
+    .align-end {
+        margin-left: auto;
+    }
+}
+
+.icon{
+  color:$btn-text-color;
+}
+
+.has-blurred-white-bg {
+    background: rgba(white, 0.85);
+    backdrop-filter: blur(20px);
+}
+
+.form-field{
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  label.form-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: rgba(black, 0.8);
+  }
+}
+
+.textbox{
+    font-size: 18px;
+    width: 100%;
+}

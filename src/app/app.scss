@@ -1,0 +1,54 @@
+$url:"https://cdn.pixabay.com/photo/2022/10/24/13/06/book-7543386_1280.jpg";
+
+@mixin set-background-image($url) {
+  background-image: $url;
+}
+
+.app-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; // Make bg stay in a fixed place with scrolling
+}
+
+.top-section{
+  text-align: center;
+  padding: 90px 0 50px 0;
+
+  h1{
+    font-size: 90px;
+    font-weight: 600;
+  }
+
+  h2{
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+}
+
+.content-section{
+  flex-grow:1;
+  min-height: 0;
+}
+
+.bottom-section{
+  display: flex;
+
+  app-tabs{
+    margin:auto;
+  }
+}
+
+.container{
+  margin:auto;
+}
+
+.darkmode{
+  $btn-text-color: rgb(181, 178, 178);
+  background-image:url("https://cdn.pixabay.com/photo/2023/12/21/13/49/ferris-wheel-8461874_1280.jpg");
+  filter: brightness(80%);
+}

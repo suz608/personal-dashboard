@@ -1,0 +1,282 @@
+$light-color:#cdcdcd;
+
+.theme-default{
+  h1, h2{
+    text-shadow:
+    0px 0px 5px rgba(255, 255, 255, 0.3),
+    0px 0px 10px rgba(255, 255, 255, 0.3),
+    0px 0px 15px rgba(255, 255, 255, 0.3),
+    0px 0px 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .tile1::before,
+  .tile2::before,
+  .tile3::before,
+  .tile4::before {
+    background: rgba(0, 0, 0, 0.24);
+  }
+
+  //.bookmarks-wrapper,
+  .add-bookmark-wrapper,
+  .edit-bookmark-wrapper,
+  .todos-wrapper,
+  .add-todo-wrapper{
+    .btn{
+      background-color: black;
+    }
+
+    .btn:hover{
+      background: rgba(73, 73, 73);
+    }
+  }
+}
+
+.theme-purple{
+  h1{
+    color: #fdfdfe;
+    text-shadow: 0px 0px 5px #b393d3, 0px 0px 10px #b393d3, 0px 0px 10px #b393d3,
+      0px 0px 20px #b393d3;
+  }
+
+  h2{
+    color: #9c3ccc;
+  }
+
+  h2,h3{
+    text-shadow:
+    0px 0px 5px rgba(255, 255, 255, 0.3),
+    0px 0px 10px rgba(255, 255, 255, 0.3),
+    0px 0px 15px rgba(255, 255, 255, 0.3),
+    0px 0px 20px rgba(255, 255, 255, 0.3);
+  }
+
+  .tile1::before{
+    background: linear-gradient(45deg, rgb(182, 102, 165), rgb(226, 159, 211));
+  }
+  .tile2::before{
+    background: linear-gradient(45deg, rgb(182, 102, 165), rgb(226, 159, 211));
+  }
+  .tile3::before{
+    background: linear-gradient(45deg, rgb(226, 159, 211), rgb(178, 251, 250));
+  }
+  .tile4::before{
+    background: linear-gradient(45deg, rgb(246, 220, 240), rgb(184, 229, 246));
+  }
+
+  .bookmarks-wrapper,
+  .add-bookmark-wrapper,
+  .edit-bookmark-wrapper,
+  .todos-wrapper,
+  .add-todo-wrapper{
+    .btn{
+      background-color: #b393d3;
+    }
+
+    .btn:hover{
+      background-color: #c4a0e7;
+    }
+  }
+}
+
+// black and white theme colors
+$bw-color-h1: rgb(131, 131, 131);
+$bw-color-1: rgb(131, 131, 131);
+$bw-color-2: rgb(150, 148, 148);
+$bw-color-3: rgb(169, 167, 167);
+$bw-color-4: rgb(212, 212, 212);
+$bw-color-5: rgb(233, 232, 232);
+
+.theme-black-white {
+  h1{
+    color: #fdfdfe;
+    text-shadow: 0px 0px 5px $bw-color-h1, 0px 0px 10px $bw-color-h1, 0px 0px 10px $bw-color-h1,
+      0px 0px 20px $bw-color-h1;
+  }
+  h2{
+    color:rgb(0,0,0);
+    text-shadow:1px 1px 0.5px  $light-color,1px -1px 0.5px  $light-color,-1px -1px 0.5px $light-color;
+  }
+
+  color: white;
+  .tile1::before{
+    background: linear-gradient(45deg, $bw-color-1, $bw-color-2,);
+  }
+  .tile2::before{
+    background: linear-gradient(45deg, $bw-color-2, $bw-color-3);
+  }
+  .tile3::before{
+    background: linear-gradient(45deg,$bw-color-3, $bw-color-4);
+  }
+  .tile4::before{
+    background: linear-gradient(45deg, $bw-color-4, $bw-color-5);
+  }
+
+  .bookmarks-wrapper,
+  .add-bookmark-wrapper,
+  .edit-bookmark-wrapper,
+  .todos-wrapper,
+  .add-todo-wrapper{
+    .btn{
+      background-color: black;
+    }
+
+    .btn:hover{
+      background: rgba(73, 73, 73);
+    }
+  }
+}
+
+$w-color-h1:#fbe8c8;
+
+$w-color-1: rgb(169,122,87);
+$w-color-2:rgb(154,89,56);
+$w-color-3: rgb(191,178,161);
+$w-color-4: rgb(167,150,123);
+$w-color-5: rgb(86,72,59);
+
+.theme-wood {
+  h1{
+    color: #fdfdfe;
+    text-shadow: 0px 0px 5px $w-color-h1, 0px 0px 10px $w-color-h1, 0px 0px 10px $w-color-h1,
+      0px 0px 20px $w-color-h1;
+  }
+
+  h2{
+    color:#d4a95e;
+  }
+
+  h3{
+    text-shadow:1px 1px 0.5px  $light-color,1px -1px 0.5px  $light-color,-1px -1px 0.5px $light-color;
+  }
+
+  .tile1::before{
+    background: linear-gradient(45deg, $w-color-1, $w-color-2,);
+  }
+  .tile2::before{
+    background: linear-gradient(45deg, $w-color-2, $w-color-3);
+  }
+  .tile3::before{
+    background: linear-gradient(45deg,$w-color-3, $w-color-4);
+  }
+  .tile4::before{
+    background: linear-gradient(45deg, $w-color-4, $w-color-5);
+  }
+
+  .bookmarks-wrapper,
+  .add-bookmark-wrapper,
+  .edit-bookmark-wrapper,
+  .todos-wrapper,
+  .add-todo-wrapper{
+    .btn{
+      background-color: rgba(222,184,135,0.5);
+    }
+
+    .btn:hover{
+      background: rgba(241, 203, 152, 0.5);
+    }
+  }
+}
+
+$b-color-h1:rgb(145, 217, 207);
+
+$b-color-1: rgb(125, 183, 245);
+$b-color-2:rgb(150, 197, 233);
+$b-color-3: rgb(156,238,230);
+$b-color-4: rgb(138,240,225);
+$b-color-5: rgb(105,240,227);
+
+.theme-blue {
+  h1{
+    color: #fdfdfe;
+    text-shadow: 0px 0px 5px $b-color-h1, 0px 0px 10px $b-color-h1, 0px 0px 10px $b-color-h1,
+      0px 0px 20px $b-color-h1;
+  }
+  h2, h3{
+    color: #24e2e8;
+  }
+
+  .tile1::before{
+    background: linear-gradient(45deg, $b-color-1, $b-color-2,);
+  }
+  .tile2::before{
+    background: linear-gradient(45deg, $b-color-2, $b-color-3);
+  }
+  .tile3::before{
+    background: linear-gradient(45deg,$b-color-3, $b-color-4);
+  }
+  .tile4::before{
+    background: linear-gradient(45deg, $b-color-4, $b-color-5);
+  }
+
+
+  .bookmarks-wrapper,
+  .add-bookmark-wrapper,
+  .edit-bookmark-wrapper,
+  .todos-wrapper,
+  .add-todo-wrapper{
+    .btn{
+      background-color: rgb(145, 217, 207);
+    }
+
+    .btn:hover{
+      background: #1db4ba;
+    }
+  }
+}
+
+
+$g-color-h1: #59f5c1;
+$g-color-1: rgb(3, 118, 72);
+$g-color-2: rgb(14,102,71);
+$g-color-3: rgb(25,157,112);
+$g-color-4: rgb(23,187,136);
+$g-color-5: rgb(57,118,108);
+
+.theme-green {
+
+  h1{
+    color: #fdfdfe;
+    text-shadow: 0px 0px 5px $g-color-h1, 0px 0px 10px $g-color-h1, 0px 0px 10px $g-color-h1,
+      0px 0px 20px $g-color-h1;
+  }
+
+  h2 {
+    color:#46bb94;
+  }
+
+  .btn{
+    background-color:rbga(22,188,145,0.5)
+  }
+
+  .btn:hover{
+    background-color:rbga(22,188,145,0.3)
+  }
+
+  .tile1::before{
+    background: linear-gradient(45deg, $g-color-1, $g-color-2,);
+  }
+  .tile2::before{
+    background: linear-gradient(45deg, $g-color-2, $g-color-3);
+  }
+  .tile3::before{
+    background: linear-gradient(45deg,$g-color-3, $g-color-4);
+  }
+  .tile4::before{
+    background: linear-gradient(45deg, $g-color-4, $g-color-5);
+  }
+
+  .bookmarks-wrapper,
+  .add-bookmark-wrapper,
+  .edit-bookmark-wrapper,
+  .todos-wrapper,
+  .add-todo-wrapper{
+    .btn{
+      background-color: rgb(23,187,136);
+    }
+
+    .btn:hover{
+      background: rgb(25,157,112);
+    }
+  }
+
+}

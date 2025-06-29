@@ -1,0 +1,22 @@
+<div class="settings-wrapper">
+
+  <div class="settings-card">
+    <h2 class="item">Theme color</h2>
+    <div class="btns-wrapper">
+      <button class="btn purple" (click)="changeTheme('theme-purple')"></button>
+      <button class="btn black-white" (click)="changeTheme('theme-black-white')"></button>
+      <button class="btn wood" (click)="changeTheme('theme-wood')"></button>
+      <button class="btn blue" (click)="changeTheme('theme-blue')"></button>
+      <button class="btn green" (click)="changeTheme('theme-green')"></button>
+      <button class="btn black" (click)="changeTheme('theme-default')"></button>
+    </div>
+  </div>
+
+  <div class="settings-card">
+    <h2 class="item">Darkmode</h2>
+    <button class="btn-darkmode" (click)="toggleDarkmode()">
+      {{ darkmode ? 'On' : 'Off' }}
+    </button>
+  </div>
+
+</div>

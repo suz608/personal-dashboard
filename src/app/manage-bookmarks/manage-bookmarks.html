@@ -1,0 +1,17 @@
+<div class="manage-bookmarks-wrapper">
+  <div class="sidebar">
+    <h2>Bookmarks</h2>
+    <div class="sidebar-items">
+      @for (bookmark of bookmarks; track bookmark) {
+        <a class="sidebar-item" [routerLink]="[bookmark.id]" routerLinkActive="selected">{{bookmark.name}}</a>
+      } @empty {
+        <p>No bookmark yet.</p>
+      }
+      <a class="sidebar-item"></a>
+    </div>
+  </div>
+
+  <div class="content has-blurred-white-bg" >
+    <router-outlet></router-outlet>
+  </div>
+</div>

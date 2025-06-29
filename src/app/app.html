@@ -1,0 +1,16 @@
+<div class="app-wrapper" [ngClass]="currentTheme" [class.darkmode]="darkmodeOn">
+
+  <div class="top-section">
+    <h1>{{ currentTime| date:'HH:mm' }}</h1>
+    <h2>{{ currentTime | date:'d MMMM y' }}</h2>
+  </div>
+
+  <div class="content-section" [@fadeInOut]="prepareRoute(outlet)" style="position:relative; overflow: hidden;">
+    <router-outlet #outlet="outlet"/>
+  </div>
+
+  <div class="bottom-section">
+    <app-tabs/>
+  </div>
+
+</div>

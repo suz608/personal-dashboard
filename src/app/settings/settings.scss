@@ -1,0 +1,82 @@
+.settings-wrapper{
+  gap:7px;
+  max-width: 60%;
+  overflow-y: scroll;
+  margin: auto;
+}
+
+.settings-card{
+  background-color: rgba(173,181,189,0.4);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h2{
+    margin-block-start: 0;
+  }
+}
+
+.btns-wrapper{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+$radius: 30px;
+
+button{
+  border-radius: 50%;
+  border-width: 1px;
+  width: $radius;
+  height: $radius;
+  cursor: pointer;
+
+  /* Place text in the center */
+  display: flex;             /* Enable Flexbox */
+  justify-content: center;   /* Center text horizontally */
+  align-items: center;       /* Center text vertically */
+
+}
+
+button:active {
+  opacity: 0.5; /* Adjust the opacity to your preference */
+  transform:translateY(2px);
+}
+
+button:hover {
+  opacity: 0.8; /* Slightly fade the button on hover */
+}
+
+.purple {
+  background-color:rgb(211, 109, 208);
+}
+
+.black-white {
+  background: linear-gradient(45deg, #000 50%, #fff 50%);
+}
+
+.wood {
+  background-color: #8B4513;
+}
+
+.blue {
+  background-color: rgb(105,240,227);
+}
+
+.green {
+  background-color: rgb(23,187,136);
+}
+
+.black {
+  background-color: rgb(0,0,0);
+  filter: blur(1px);
+}
+
+.btn-darkmode{
+  border-radius: 15px;
+}

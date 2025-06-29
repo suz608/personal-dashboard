@@ -1,0 +1,19 @@
+.bookmarks-wrapper{
+  max-width: 60%;
+  height: 100%;
+  margin: auto;
+  overflow-y: scroll;
+}
+
+.bookmarks, .btns{
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: 20px; /* Gap between two squares */
+}
+
+.settings{
+  transform:scale(0.8);
+}
