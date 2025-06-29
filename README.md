@@ -8,7 +8,7 @@ This is a personal dashboard web app. It features:
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
 
-## Table of Contentstext-[rgb(112,112,112)]
+## Table of Content
 - [Tech Stack](#tech-stack)
 - [Installation](#Installation)
 - [Screenshots](#screenshots)
