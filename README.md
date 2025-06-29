@@ -65,11 +65,13 @@ Here are some screenshots of the app in action:
 This app adapts well on devices of different sizes. Here are some screenshots:
 
 - iPhoneSE:
-  ![iPhoneSE Screenshot](AppPhotos/iPhoneSE.png)
+  <img src="AppPhotos/iPhoneSE.png" alt="iPhoneSE Screenshot" style="max-width: 100%; height: auto;">
+  
 - GalaxyZFold5:
-  ![GalaxyZFold5 Screenshot](AppPhotos/GalaxyZFold5.png)
+  <img src="AppPhotos/GalaxyZFold5.png" alt="GalaxyZFold5 Screenshot" style="max-width: 100%; height: auto;">
+
 - iPadMini:
-  ![iPadMini Screenshot](AppPhotos/iPadMini.png)
+  <img src="AppPhotos/iPadMini.png" alt="iPadMini Screenshot" style="max-width: 100%; height: auto;">
 
 ## License
 PersonalDashboard is open-source and available under the MIT License.
