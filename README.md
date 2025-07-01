@@ -25,7 +25,9 @@ This repository only includes the frontend of this app. A Django backend availab
 - Angular Materials
 ### Backend
 - Django
-- pipenv
+- Pip & pipenv
+- SQLite
+- Django CORS Headers
 
 ## Installation
 ### Frontend Setup
