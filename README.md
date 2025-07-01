@@ -8,6 +8,8 @@ This is a personal dashboard web app. It features:
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
 
+This repository only includes the frontend of this app. A Django backend available here [DashboardAPI](https://github.com/suz608/DashboardAPI).
+
 ## Table of Content
 - [Tech Stack](#tech-stack)
 - [Installation](#Installation)
@@ -16,10 +18,14 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 - [License](#license)
 
 ## Tech Stack
+### Frontend
 - Angular.js
 - TypeScript
 - SASS
 - Angular Materials
+### Backend
+- Django
+- pipenv
 
 ## Installation
 ### Frontend Setup
