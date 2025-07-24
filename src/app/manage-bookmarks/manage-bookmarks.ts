@@ -15,8 +15,6 @@ export class ManageBookmarks implements OnInit{
   constructor(private bookmarkService: BookmarkService){}
 
   ngOnInit() {
-    this.bookmarkService.getBookmarks().subscribe((bookmarks: Bookmark[]) => {
-      this.bookmarks = bookmarks;
-    });
+    this.bookmarks = this.bookmarkService.getBookmarks();
   }
 }

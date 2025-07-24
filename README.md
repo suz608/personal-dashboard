@@ -8,11 +8,13 @@ This is a personal dashboard web app. It features:
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
 
-This repository only includes the frontend of this app. A Django backend available here [DashboardAPI](https://github.com/suz608/DashboardAPI).
+This repository only includes the frontend of this app. 
+Go to the backend servers section for the backend of this app.
 
 ## Table of Content
 - [Tech Stack](#tech-stack)
 - [Installation](#Installation)
+- [Backend Servers](#backend-servers)
 - [Screenshots](#screenshots)
 - [Responsive Design](#responsive-design)
 - [License](#license)
@@ -24,10 +26,18 @@ This repository only includes the frontend of this app. A Django backend availab
 - SASS
 - Angular Materials
 ### Backend
+#### GraphQL + Spring Boot
+- Java 24 
+- Maven
+- Spring Boot 3.5.3
+- MySQL 9.3.0
+- GraphQL
+#### Django
 - Django
+- Django Rest Framework
+- Django CORS Headers
 - Pip & pipenv
 - SQLite
-- Django CORS Headers
 
 ## Installation
 ### Frontend Setup
@@ -57,6 +67,14 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Backend Servers
+- **GraphQL+Spring Boot server**
+  [SpringGraphQLAPI](https://github.com/suz608/spring-graphql-api).
+- **Django+RESTful apis**
+  [DjangoRestAPI](https://github.com/suz608/django-rest-api).
+
+Note: The current version uses local storage for data management, as adjustments are required to accommodate differences between RESTful and GraphQL APIs.  The architecture allows for straightforward backend integration with minor modifications.
 
 ## Screenshots
 Here are some screenshots of the app in action:

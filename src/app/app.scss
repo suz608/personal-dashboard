@@ -1,14 +1,17 @@
 $url:"https://cdn.pixabay.com/photo/2022/10/24/13/06/book-7543386_1280.jpg";
+$url2:"https://cdn.pixabay.com/photo/2025/07/16/07/19/british-shorthair-9717301_1280.jpg";
+$dark-url:"https://cdn.pixabay.com/photo/2023/06/04/00/34/flowers-8038712_1280.jpg";
+$dark-url2:"https://cdn.pixabay.com/photo/2023/12/21/13/49/ferris-wheel-8461874_1280.jpg";
 
-@mixin set-background-image($url) {
-  background-image: $url;
-}
+// @mixin set-background-image($url) {
+//   background-image: $url;
+// }
 
 .app-wrapper{
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-image: url($url);
+  background-image: url($url2);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed; // Make bg stay in a fixed place with scrolling
@@ -49,6 +52,6 @@ $url:"https://cdn.pixabay.com/photo/2022/10/24/13/06/book-7543386_1280.jpg";
 
 .darkmode{
   $btn-text-color: rgb(181, 178, 178);
-  background-image:url("https://cdn.pixabay.com/photo/2023/12/21/13/49/ferris-wheel-8461874_1280.jpg");
+  background-image: url($dark-url);
   filter: brightness(80%);
 }
