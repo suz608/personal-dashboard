@@ -7,7 +7,7 @@ This is a personal dashboard web app. It features:
 - 🌄 Random ackground images
 - 🎨 Colored themes & dark mode
 
-<!-- > 🌐 [Live Demo](https://to-be-deployed.com) -->
+> 🌐 [Live Demo (Hosted on AWS S3)](https://personal-dashboard-website.s3.ap-southeast-1.amazonaws.com/index.html)
 
 > ⚙️ Built with Angular + RxJS + SASS
 
