@@ -68,6 +68,11 @@ export class TodoService implements OnDestroy{
     this.saveState();
   }
 
+  deleteAll(){
+    this.todos = []
+    this.saveState();
+  }
+
   saveState() {
     localStorage.setItem('todos', JSON.stringify(this.todos));
   }

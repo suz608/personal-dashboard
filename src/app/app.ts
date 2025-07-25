@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit,Renderer2} from '@angular/core';
 import { Tabs } from './tabs/tabs';
 import { RouterOutlet } from '@angular/router';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { ThemeService } from './shared/theme-color';
 import { DarkmodeService } from './shared/darkmode';
+import { BackgroundImage} from './shared/background-image';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Loader } from './loader/loader';
 
 @Component({
   selector: 'app-root',
-  imports: [ CommonModule,Tabs,RouterOutlet,],
+  standalone: true,
+  imports: [CommonModule, Tabs, RouterOutlet, MatProgressSpinnerModule, Loader],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   animations: [
@@ -62,7 +66,7 @@ import { DarkmodeService } from './shared/darkmode';
     ])
   ]
 })
-export class App  implements OnInit, OnDestroy {
+export class App implements OnInit, OnDestroy {
   currentTime: Date = new Date();
   currentTheme: string = '';
   darkmodeOn: boolean = true;
@@ -70,7 +74,8 @@ export class App  implements OnInit, OnDestroy {
   private themeSubscription: Subscription | null = null;
   private darkmodeSubscription: Subscription | null = null;
 
-  constructor(private themeService: ThemeService, private darkmodeService:DarkmodeService) {}
+  constructor(private themeService: ThemeService, private darkmodeService:DarkmodeService, private bgService: BackgroundImage,
+    private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.intervalId = setInterval(() => {
@@ -84,6 +89,20 @@ export class App  implements OnInit, OnDestroy {
     this.darkmodeSubscription = this.darkmodeService.darkMode$.subscribe((darkmode) => {
       this.darkmodeOn = darkmode;
     });
+
+    this.bgService.getImage().subscribe(imageUrl => {
+      if (imageUrl) {
+        const img = new Image();
+        img.onload = () => {
+          this.renderer.setStyle(document.body, 'backgroundImage', `url(${imageUrl})`);
+        };
+        img.src = imageUrl;
+      }
+      this.renderer.setStyle(document.body,'backgroundRepeat','no-repeat')
+      this.renderer.setStyle(document.body,'backgroundSize','cover')
+      this.renderer.setStyle(document.body,'backgroundPosition','center')
+    });
+
   }
 
   ngOnDestroy(): void {
@@ -106,5 +125,4 @@ export class App  implements OnInit, OnDestroy {
     }
     return '';
   }
-
 }

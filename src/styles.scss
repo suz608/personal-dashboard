@@ -1,11 +1,28 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 @use "./app/styles/theme-colors";
 @import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css"); /* Remove all default styling */
 
 $btn-text-color: white;
+
+// decorate spinnner
+@include mat.progress-spinner-overrides((
+  active-indicator-color: rgb(77, 77, 177),
+));
+
+body {
+  margin: 0;
+  transition: background-image 0s, opacity 1s ease-in;
+}
+
+p{
+  font-size:22px;
+  font-weight: 500;
+  text-shadow:
+  0px 0px 5px rgba(255, 255, 255, 0.3),
+  0px 0px 10px rgba(255, 255, 255, 0.3),
+  0px 0px 15px rgba(255, 255, 255, 0.3),
+  0px 0px 20px rgba(255, 255, 255, 0.3);
+}
 
 h2{
   font-size: 24px;
@@ -22,10 +39,6 @@ h3{
 
 html, body {
   height: 100%;
-}
-
-body {
-  margin: 0;
 }
 
 .btn {

@@ -11,6 +11,7 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './todos.html',
   styleUrls: ['./todos.scss']
 })
+
 export class Todos implements OnInit {
 
   todos!: Todo[];
@@ -27,5 +28,10 @@ export class Todos implements OnInit {
 
   navigateToAddTodo() {
     this.router.navigate(['/todos/add']);
+  }
+
+  deleteAll(){
+    this.todos=[]
+    this.todoService.deleteAll();
   }
 }

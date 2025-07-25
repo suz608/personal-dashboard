@@ -1,15 +1,15 @@
 # Personal Dashboard
 This is a personal dashboard web app. It features:
-- Date & time
-- Bookmarks
-- Todos
-- Timer
-- Colored themes & darkmode
+- 📅 Date & time
+- 🔖 Bookmarks
+- ✅ Todos
+- ⏲️ Timer
+- 🌄 Random ackground images
+- 🎨 Colored themes & dark mode
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+<!-- > 🌐 [Live Demo](https://to-be-deployed.com) -->
 
-This repository only includes the frontend of this app. 
-Go to the backend servers section for the backend of this app.
+> ⚙️ Built with Angular + RxJS + SASS
 
 ## Table of Content
 - [Tech Stack](#tech-stack)
@@ -21,10 +21,11 @@ Go to the backend servers section for the backend of this app.
 
 ## Tech Stack
 ### Frontend
-- Angular.js
+- Angular 20.0.2
 - TypeScript
 - SASS
 - Angular Materials
+- Pixabay API
 ### Backend
 #### GraphQL + Spring Boot
 - Java 24 
@@ -52,7 +53,27 @@ Go to the backend servers section for the backend of this app.
     cd personal-dashboard
     npm install
     ```
-3. To start a local development server, run:
+3. Generate environment:
+
+  For development, create a new file at `./src/environments/environment.development.ts` and add the following configuration:
+
+  ```bash
+  export const environment = {
+    production: false,
+    pixabayKey: '<Pixabay-API-URL>',
+  };
+  ```
+
+  For production, create a new file at `./src/environments/environment.ts` and add the following configuration:
+
+  ```bash
+  export const environment = {
+    production: true,
+    pixabayKey: '<Pixabay-API-URL>',
+  };
+  ```
+
+4. To start a local development server, run:
 
     ```bash
     ng serve
@@ -60,7 +81,7 @@ Go to the backend servers section for the backend of this app.
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-4. To build the project run:
+5. To build the project run:
 
 ```bash
 ng build
@@ -69,6 +90,7 @@ ng build
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
 ## Backend Servers
+This repository only includes the frontend of this app. The backend servers are available in following repositorys.
 - **GraphQL+Spring Boot server**
   [SpringGraphQLAPI](https://github.com/suz608/spring-graphql-api).
 - **Django+RESTful apis**
