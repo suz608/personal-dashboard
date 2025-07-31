@@ -1,5 +1,10 @@
 <div class="app-wrapper" [ngClass]="currentTheme" [class.darkmode]="darkmodeOn">
     <app-loader></app-loader>
+    
+    <div class="btn change-bg-btn" (click)="refreshImage()" [@fadeAnim]="loadingImage">
+      <mat-icon class="icon" fontIcon="refresh"></mat-icon>
+    </div>
+
     <div class="top-section">
       <h1>{{ currentTime| date:'HH:mm' }}</h1>
       <h2>{{ currentTime | date:'d MMMM y' }}</h2>

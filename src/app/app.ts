@@ -9,11 +9,12 @@ import { DarkmodeService } from './shared/darkmode';
 import { BackgroundImage} from './shared/background-image';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Loader } from './loader/loader';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, Tabs, RouterOutlet, MatProgressSpinnerModule, Loader],
+  imports: [CommonModule, MatIcon, Tabs, RouterOutlet, MatProgressSpinnerModule, Loader],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   animations: [
@@ -61,19 +62,89 @@ import { Loader } from './loader/loader';
             animate('0.2s 0.1s', style({ opacity: 1,  transform:'translateX(0)'}))
           ], { optional: true }),
         ])
+      ]),
+
+      // Animation for non-tab elements
+      transition('* => secondary', [
+        style({
+          position: 'relative',
+        }),
+
+        group([
+          query(':leave', [
+            animate('200ms ease-in', style({
+              opacity: 0,
+              transform: 'scale(0.8)'
+            }))
+          ], { optional: true }),
+
+          query(':enter', [
+            style({
+              transform: 'scale(1.2)',
+              opacity: 0
+            }),
+            animate('250ms 120ms ease-out', style({
+              opacity: 1,
+              transform: 'scale(1)'
+            }))
+          ], { optional: true })
+        ])
+      ]),
+
+      transition('secondary => *', [
+        style({
+          position: 'relative',
+        }),
+
+        group([
+          query(':leave', [
+            animate('200ms ease-in', style({
+              opacity: 0,
+              transform: 'scale(1.25)'
+            }))
+          ], { optional: true }),
+
+          query(':enter', [
+            style({
+              transform: 'scale(0.8)',
+              opacity: 0
+            }),
+            animate('250ms 120ms ease-out', style({
+              opacity: 1,
+              transform: 'scale(1)'
+            }))
+          ], { optional: true })
+        ])
       ])
 
+    ]),
+
+    trigger('fadeAnim', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({
+          opacity: 1
+        }))
+      ]),
+
+      transition(':leave', [
+        animate('500ms', style({ opacity: 0 }))
+      ])
     ])
+
   ]
 })
+
 export class App implements OnInit, OnDestroy {
   currentTime: Date = new Date();
   currentTheme: string = '';
   darkmodeOn: boolean = true;
+  isRefreshed: boolean = false;
   private intervalId: any;
   private themeSubscription: Subscription | null = null;
   private darkmodeSubscription: Subscription | null = null;
-
+  loadingImage: boolean=false;
+  
   constructor(private themeService: ThemeService, private darkmodeService:DarkmodeService, private bgService: BackgroundImage,
     private renderer: Renderer2) {}
 
@@ -90,19 +161,24 @@ export class App implements OnInit, OnDestroy {
       this.darkmodeOn = darkmode;
     });
 
-    this.bgService.getImage().subscribe(imageUrl => {
-      if (imageUrl) {
-        const img = new Image();
-        img.onload = () => {
-          this.renderer.setStyle(document.body, 'backgroundImage', `url(${imageUrl})`);
-        };
-        img.src = imageUrl;
-      }
-      this.renderer.setStyle(document.body,'backgroundRepeat','no-repeat')
-      this.renderer.setStyle(document.body,'backgroundSize','cover')
-      this.renderer.setStyle(document.body,'backgroundPosition','center')
-    });
-
+    // Call API to get background image
+    // this.bgService.getImage().subscribe(imageUrl => {
+    //   if (imageUrl) {
+    //     const img = new Image();
+    //     img.onload = () => {
+    //       this.renderer.setStyle(document.body, 'backgroundImage', `url(${imageUrl})`);
+    //     };
+    //     img.src = imageUrl;
+    //   }
+    // });
+    const imgUrl=this.bgService.getImage()
+    if(imgUrl){
+      const img = new Image();
+            img.onload = () => {
+        this.renderer.setStyle(document.body, 'backgroundImage', `url(${imgUrl})`);
+      };
+      img.src = imgUrl;
+    }
   }
 
   ngOnDestroy(): void {
@@ -117,12 +193,36 @@ export class App implements OnInit, OnDestroy {
     }
   }
 
-  // Method to check if an outlet is activated
+  // // Method to check if an outlet is activated
+  // prepareRoute(outlet: RouterOutlet) {
+  //   if (outlet.isActivated) {
+  //     // return outlet.activatedRoute.snapshot.url;  // Returns the URL of the activated route
+  //     return outlet.activatedRouteData['tab']; // To go thru pages like a book, get index of it.
+  //   }
+  //   return '';
+  // }
+
+  // Updated method: returns the index of tab or 'secondary'
   prepareRoute(outlet: RouterOutlet) {
     if (outlet.isActivated) {
-      // return outlet.activatedRoute.snapshot.url;  // Returns the URL of the activated route
-      return outlet.activatedRouteData['tab']; // To go thru pages like a book, get index of it.
+      const tab = outlet.activatedRouteData['tab']
+      if (!tab) return 'secondary'
+      return tab
     }
-    return '';
+  }
+
+  refreshImage() {
+    this.loadingImage = true; // Set loading to true before loading the image
+
+    const imgUrl = this.bgService.getImage(); // Get the image URL
+    if (imgUrl) {
+      const img = new Image();
+      img.onload = () => {
+        // Once the image is loaded, set the background image and stop the loading state
+        this.renderer.setStyle(document.body, 'backgroundImage', `url(${imgUrl})`);
+        this.loadingImage = false; // Now stop loading once the image has loaded
+      };
+      img.src = imgUrl; // Start loading the image
+    }
   }
 }

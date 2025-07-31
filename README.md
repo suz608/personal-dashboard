@@ -4,7 +4,7 @@ This is a personal dashboard web app. It features:
 - 🔖 Bookmarks
 - ✅ Todos
 - ⏲️ Timer
-- 🌄 Random ackground images
+- 🌄 Random background images
 - 🎨 Colored themes & dark mode
 
 > 🌐 [Live Demo (Hosted on AWS S3)](https://personal-dashboard-website.s3.ap-southeast-1.amazonaws.com/index.html)
@@ -25,7 +25,7 @@ This is a personal dashboard web app. It features:
 - TypeScript
 - SASS
 - Angular Materials
-- Pixabay API
+- Pixabay
 ### Backend
 #### GraphQL + Spring Boot
 - Java 24 
@@ -39,6 +39,8 @@ This is a personal dashboard web app. It features:
 - Django CORS Headers
 - Pip & pipenv
 - SQLite
+### Could Services
+- AWS S3
 
 ## Installation
 ### Frontend Setup
@@ -53,7 +55,7 @@ This is a personal dashboard web app. It features:
     cd personal-dashboard
     npm install
     ```
-3. Generate environment:
+3. Generate environment(If you want to use API calls instead of URLs to get background image):
 
   For development, create a new file at `./src/environments/environment.development.ts` and add the following configuration:
 

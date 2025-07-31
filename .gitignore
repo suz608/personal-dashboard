@@ -4,3 +4,4 @@ node_modules
 src/.DS_Store
 src/app/.DS_Store
 src/environments/environment*.ts
+dist

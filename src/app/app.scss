@@ -47,3 +47,30 @@ $dark-url2:"https://cdn.pixabay.com/photo/2023/12/21/13/49/ferris-wheel-8461874_
   $btn-text-color: rgb(181, 178, 178);
   filter: brightness(80%);
 }
+
+.change-bg-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  padding: 10px;
+
+  background: rgba(black, 0.1);
+  color: rgba(white, 0.7);
+
+  &:hover {
+      background: rgba(black, 0.3);
+      color: white;
+  }
+
+  &:active {
+      transform: translateY(1px);
+  }
+}
+
+.bg-img{
+  position:fixed;
+  z-index: -1;
+  height:100%;
+  width:100%;
+  object-fit:cover;
+}
