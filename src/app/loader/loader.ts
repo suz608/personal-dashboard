@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { LoaderService } from '../shared/loader';
 import { CommonModule } from '@angular/common';
 

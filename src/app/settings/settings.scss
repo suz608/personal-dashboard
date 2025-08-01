@@ -3,6 +3,8 @@
   max-width: 60%;
   overflow-y: scroll;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings-card{
@@ -79,4 +81,8 @@ button:hover {
 
 .btn-darkmode{
   border-radius: 15px;
+}
+
+.join-wrapper{
+  gap:7px;
 }

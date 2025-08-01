@@ -9,10 +9,10 @@ import { LoaderInterceptor } from './interceptors/loader';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(withInterceptors([LoaderInterceptor])),
+    provideHttpClient(withInterceptors([LoaderInterceptor])), 
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    //provideAnimations(),
+   // provideAnimations(),
   ]
 };

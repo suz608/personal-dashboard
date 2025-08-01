@@ -1,7 +1,8 @@
 <div class="app-wrapper" [ngClass]="currentTheme" [class.darkmode]="darkmodeOn">
+  
     <app-loader></app-loader>
-    
-    <div class="btn change-bg-btn" (click)="refreshImage()" [@fadeAnim]="loadingImage">
+
+    <div class="btn change-bg-btn" (click)="refreshImage()">
       <mat-icon class="icon" fontIcon="refresh"></mat-icon>
     </div>
 

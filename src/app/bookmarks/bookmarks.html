@@ -4,7 +4,7 @@
     @for (bookmark of bookmarks; track bookmark) {
       <app-bookmark-tile [bookmark]="bookmark"/>
     } @empty {
-      <p>No bookmark yet.</p>
+      <p class="p-empty">No bookmark yet.</p>
     }
   </div>
 

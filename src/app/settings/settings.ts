@@ -1,12 +1,13 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../shared/theme-color';
-import { stringify } from 'uuid';
 import { DarkmodeService } from '../shared/darkmode';
+import { FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.html',
-  styleUrls: ['./settings.scss']
+  styleUrls: ['./settings.scss'],
+  imports:[FormsModule]
 })
 export class Settings implements OnInit{
   darkmode!: boolean;
@@ -28,4 +29,5 @@ export class Settings implements OnInit{
     this.darkmode = !this.darkmode;
     this.darkmodeService.toggleDarkmode();
   }
+
 }

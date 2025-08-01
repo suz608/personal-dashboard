@@ -15,17 +15,20 @@ This is a personal dashboard web app. It features:
 - [Tech Stack](#tech-stack)
 - [Installation](#Installation)
 - [Backend Servers](#backend-servers)
+- [Docker Setup](#docker-setup)
 - [Screenshots](#screenshots)
 - [Responsive Design](#responsive-design)
 - [License](#license)
 
 ## Tech Stack
 ### Frontend
-- Angular 20.0.2
+- Angular(20.0.2)
+- Node.js
+- RxJS
 - TypeScript
 - SASS
 - Angular Materials
-- Pixabay
+- Pixabay API
 ### Backend
 #### GraphQL + Spring Boot
 - Java 24 
@@ -55,7 +58,9 @@ This is a personal dashboard web app. It features:
     cd personal-dashboard
     npm install
     ```
-3. Generate environment(If you want to use API calls instead of URLs to get background image):
+3. Generate environment:
+
+  This app uses Pixabay API for background images. For safety reasons, the API keys are stored in environment files. You could get your own API key follow the official documentation at [API-Pixabay](https://pixabay.com/service/about/api/), then, replace '<Pixabay-API-URL>' with your API key in the environment files.
 
   For development, create a new file at `./src/environments/environment.development.ts` and add the following configuration:
 
@@ -98,7 +103,37 @@ This repository only includes the frontend of this app. The backend servers are 
 - **Django+RESTful apis**
   [DjangoRestAPI](https://github.com/suz608/django-rest-api).
 
-Note: The current version uses local storage for data management, as adjustments are required to accommodate differences between RESTful and GraphQL APIs.  The architecture allows for straightforward backend integration with minor modifications.
+> The GitHub version uses local storage for data management, as adjustments are required to accommodate differences between RESTful and GraphQL APIs.  The architecture allows for straightforward backend integration with minor modifications.
+
+## Docker Setup
+Follow these steps to build and run the app in a Docker container.
+### 1. Build the Docker Image
+From the root of the project, where your Dockerfile is located, run the following command:
+```bash
+docker build -t personal-dashboard .
+```
+### 2. Run the Docker Container
+After the image is successfully built, you can run the container with:
+```bash
+docker run -p 8080:80 personal-dashboard
+```
+This will run the application in the container and map the container’s port 80 to your local port 8080.
+
+Now, you should be able to access the app in your browser at http://localhost:8080.
+### 3. Clean Up Docker Containers and Images (Optional)
+If you need to remove the container or image, you can use the following commands:
+Stop the container:
+```bash
+docker stop <container-id>
+```
+Remove the container:
+```bash
+docker rm <container-id>
+```
+Remove the image:
+```bash
+docker rmi expense-tracker
+```
 
 ## Screenshots
 Here are some screenshots of the app in action:

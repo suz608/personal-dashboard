@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit,Renderer2} from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import { Tabs } from './tabs/tabs';
 import { RouterOutlet } from '@angular/router';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
@@ -92,9 +92,9 @@ import { MatIcon } from '@angular/material/icon';
       ]),
 
       transition('secondary => *', [
-        style({
-          position: 'relative',
-        }),
+        query(':enter, :leave', [
+          style({ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' })
+        ], { optional: true }),
 
         group([
           query(':leave', [
@@ -118,20 +118,7 @@ import { MatIcon } from '@angular/material/icon';
       ])
 
     ]),
-
-    trigger('fadeAnim', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('500ms', style({
-          opacity: 1
-        }))
-      ]),
-
-      transition(':leave', [
-        animate('500ms', style({ opacity: 0 }))
-      ])
-    ])
-
+    
   ]
 })
 
@@ -139,14 +126,16 @@ export class App implements OnInit, OnDestroy {
   currentTime: Date = new Date();
   currentTheme: string = '';
   darkmodeOn: boolean = true;
-  isRefreshed: boolean = false;
   private intervalId: any;
   private themeSubscription: Subscription | null = null;
   private darkmodeSubscription: Subscription | null = null;
   loadingImage: boolean=false;
+
+  backgrounds: string[] = [
+    "https://cdn.pixabay.com/photo/2017/08/01/11/38/sea-2564601_1280.jpg"
+  ]
   
-  constructor(private themeService: ThemeService, private darkmodeService:DarkmodeService, private bgService: BackgroundImage,
-    private renderer: Renderer2) {}
+  constructor(private themeService: ThemeService, private darkmodeService:DarkmodeService, private bgService: BackgroundImage, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.intervalId = setInterval(() => {
@@ -161,24 +150,12 @@ export class App implements OnInit, OnDestroy {
       this.darkmodeOn = darkmode;
     });
 
-    // Call API to get background image
-    // this.bgService.getImage().subscribe(imageUrl => {
-    //   if (imageUrl) {
-    //     const img = new Image();
-    //     img.onload = () => {
-    //       this.renderer.setStyle(document.body, 'backgroundImage', `url(${imageUrl})`);
-    //     };
-    //     img.src = imageUrl;
-    //   }
-    // });
-    const imgUrl=this.bgService.getImage()
-    if(imgUrl){
-      const img = new Image();
-            img.onload = () => {
-        this.renderer.setStyle(document.body, 'backgroundImage', `url(${imgUrl})`);
-      };
-      img.src = imgUrl;
-    }
+    let imgUrl = this.backgrounds[0]
+    const img = new Image();
+    img.onload = () => { //The onload event handler will only be triggered when the image is fully loaded
+      this.renderer.setStyle(document.body, 'backgroundImage', `url(${imgUrl})`);
+    };
+    img.src = imgUrl;
   }
 
   ngOnDestroy(): void {
@@ -211,18 +188,48 @@ export class App implements OnInit, OnDestroy {
     }
   }
 
-  refreshImage() {
+
+  async refreshImage() {
     this.loadingImage = true; // Set loading to true before loading the image
 
-    const imgUrl = this.bgService.getImage(); // Get the image URL
-    if (imgUrl) {
+    // Limit the number of retries to prevent an infinite loop in case all images are already used
+    const maxRetries = 5;
+    let retries = 0;
+
+    while (retries < maxRetries) {
+      const imgUrl = await this.bgService.getImage(); // Get the image URL
+
+      // Check if the image URL already exists in the backgrounds array
+      const alreadyGot = this.backgrounds.includes(imgUrl);
+      if (alreadyGot) {
+        retries++; // Increment retry counter if the image is already in the list
+        continue; // Skip to next iteration to try a new image
+      }
+
       const img = new Image();
       img.onload = () => {
-        // Once the image is loaded, set the background image and stop the loading state
+         // Set the background image once the image is loaded
         this.renderer.setStyle(document.body, 'backgroundImage', `url(${imgUrl})`);
-        this.loadingImage = false; // Now stop loading once the image has loaded
+
+        // Add the new unique image URL to the backgrounds list
+        this.backgrounds.push(imgUrl);
+
+        // Stop loading once the image is successfully applied
+        this.loadingImage = false;
       };
+
+      img.onerror = (error) => {
+        console.error('Error loading image:', error);
+        retries++; // Increment retry counter on image load failure
+        if (retries >= maxRetries) {
+          console.warn('Max retries reached, no new image found.');
+          this.loadingImage = false; // Stop loading if no new image is found
+        }
+      };
+
       img.src = imgUrl; // Start loading the image
+      return;  // Exit the function as we have a new unique image
     }
   }
+
 }
