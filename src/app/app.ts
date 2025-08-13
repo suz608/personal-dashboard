@@ -6,9 +6,9 @@ import { trigger, transition, style, animate, query, group } from '@angular/anim
 import { Subscription } from 'rxjs';
 import { ThemeService } from './shared/theme-color';
 import { DarkmodeService } from './shared/darkmode';
-import { BackgroundImage} from './shared/background-image';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Loader } from './loader/loader';
+import { environment } from '../environments/environment.development';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -100,7 +100,7 @@ import { MatIcon } from '@angular/material/icon';
           query(':leave', [
             animate('200ms ease-in', style({
               opacity: 0,
-              transform: 'scale(1.25)'
+              transform: 'scale(1.1)'
             }))
           ], { optional: true }),
 
@@ -127,15 +127,16 @@ export class App implements OnInit, OnDestroy {
   currentTheme: string = '';
   darkmodeOn: boolean = true;
   private intervalId: any;
+  fallbackIndex = 0;
   private themeSubscription: Subscription | null = null;
   private darkmodeSubscription: Subscription | null = null;
   loadingImage: boolean=false;
 
   backgrounds: string[] = [
-    "https://cdn.pixabay.com/photo/2017/08/01/11/38/sea-2564601_1280.jpg"
+    "https://cdn.pixabay.com/photo/2017/08/01/11/38/sea-2564601_1280.jpg",
   ]
   
-  constructor(private themeService: ThemeService, private darkmodeService:DarkmodeService, private bgService: BackgroundImage, private renderer: Renderer2) {}
+  constructor(private themeService: ThemeService, private darkmodeService:DarkmodeService, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.intervalId = setInterval(() => {
@@ -188,47 +189,78 @@ export class App implements OnInit, OnDestroy {
     }
   }
 
-
   async refreshImage() {
-    this.loadingImage = true; // Set loading to true before loading the image
+    this.loadingImage = true;
 
-    // Limit the number of retries to prevent an infinite loop in case all images are already used
     const maxRetries = 5;
-    let retries = 0;
+    const timeoutMs = 1000;
 
-    while (retries < maxRetries) {
-      const imgUrl = await this.bgService.getImage(); // Get the image URL
+    const fallbackImages = [
+      "https://cdn.pixabay.com/photo/2025/07/08/06/59/grass-9702166_1280.jpg",
+      "https://cdn.pixabay.com/photo/2025/03/07/13/11/flower-9453062_1280.jpg",
+      "https://cdn.pixabay.com/photo/2021/11/25/20/52/river-6824576_1280.jpg"
+    ];
 
-      // Check if the image URL already exists in the backgrounds array
-      const alreadyGot = this.backgrounds.includes(imgUrl);
-      if (alreadyGot) {
-        retries++; // Increment retry counter if the image is already in the list
-        continue; // Skip to next iteration to try a new image
-      }
+    const API_KEY = environment.pixabayKey;
+    const API_URL = 'https://pixabay.com/api/';
+    const categories = [
+      'beach', 'city', 'forest', 'mountain', 'technology', 'animals', 'ocean', 'space', 'flowers'
+    ];
 
-      const img = new Image();
-      img.onload = () => {
-         // Set the background image once the image is loaded
-        this.renderer.setStyle(document.body, 'backgroundImage', `url(${imgUrl})`);
+    const loadImage = (url: string): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          this.renderer.setStyle(document.body, 'backgroundImage', `url(${url})`);
+          this.backgrounds.push(url);
+          resolve();
+        };
+        img.onerror = reject;
+        img.src = url;
+      });
+    };
 
-        // Add the new unique image URL to the backgrounds list
-        this.backgrounds.push(imgUrl);
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+      try {
+        // Construct API request
+        const query = categories[Math.floor(Math.random() * categories.length)];
+        const url = `${API_URL}?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo&safesearch=True&per_page=10`;
 
-        // Stop loading once the image is successfully applied
-        this.loadingImage = false;
-      };
+        const request = fetch(url).then(res => res.json());
 
-      img.onerror = (error) => {
-        console.error('Error loading image:', error);
-        retries++; // Increment retry counter on image load failure
-        if (retries >= maxRetries) {
-          console.warn('Max retries reached, no new image found.');
-          this.loadingImage = false; // Stop loading if no new image is found
+        const response: any = await Promise.race([
+          request,
+          new Promise<never>((_, reject) => setTimeout(() => reject(new Error('Timeout')), timeoutMs))
+        ]);
+
+        if (response.totalHits > 0) {
+          const randomIndex = Math.floor(Math.random() * response.hits.length);
+          const imageUrl = response.hits[randomIndex].largeImageURL;
+
+          if (this.backgrounds.includes(imageUrl)) {
+            continue; // Duplicate — retry
+          }
+
+          await loadImage(imageUrl); // Load image
+          this.loadingImage = false;
+          return;
         }
-      };
 
-      img.src = imgUrl; // Start loading the image
-      return;  // Exit the function as we have a new unique image
+      } catch (err) {
+        console.warn(`Attempt ${attempt + 1} failed:`, err);
+      }
+    }
+
+    // All retries failed — use fallback
+    const fallbackUrl = fallbackImages[this.fallbackIndex];
+    this.fallbackIndex = (this.fallbackIndex + 1) % fallbackImages.length;
+
+    try {
+      await loadImage(fallbackUrl);
+    } catch (err) {
+      console.error("Fallback image failed to load as well:", err);
+    } finally {
+      this.loadingImage = false;
     }
   }
 
